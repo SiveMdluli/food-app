@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
 
-  // Checking for required fields
+  // Checking if required fields are filled
   if (!name || !email || !password) {
     return res
       .status(400)

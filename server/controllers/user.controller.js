@@ -1,8 +1,8 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
+
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
-
   // Checking if required fields are filled
   if (!name || !email || !password) {
     return res
@@ -63,7 +63,6 @@ exports.updateUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   // Validation can be added to check for required update fields
-
   try {
     const user = await User.findByIdAndUpdate(
       userId,
@@ -92,5 +91,26 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error deleting user' });
+  }
+};
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
+  //Validate email and password before...
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Please provide email and password' });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+    
+    res.status(200).json({ message: 'Login successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error logging in' });
   }
 };

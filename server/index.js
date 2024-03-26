@@ -24,12 +24,11 @@ app.get('/', (req, res) => {
 
 mongoose
   .connect(
-    'mongodb+srv://sive:umvMMzvZaHrOnWlB@food-app.jyycekq.mongodb.net/?retryWrites=true&w=majority&appName=food-app'
+    'mongodb+srv://sive:RIhnU3Qv1aTHjhuS@food-app.jyycekq.mongodb.net/?retryWrites=true&w=majority&appName=food-app'
   )
   .then(() => {
-    console.log('Connected to the database!');
+    console.log('Connected to the database !');
   })
-
   .catch(() => {
     console.log('Connection failed');
   });
